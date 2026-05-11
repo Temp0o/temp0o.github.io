@@ -14,6 +14,7 @@
     // TAB & META
     tabTitle:        "PM Web Design | Professional Websites for Small Businesses",
     metaDescription: "PM Web Design builds fast, beautiful custom websites for small businesses. Mobile-first, hand-coded, built to convert.",
+    faviconUrl:      "", // URL to your favicon image (leave empty for none)
 
     // BRAND
     ownerName:       "Peter M",
@@ -22,7 +23,7 @@
 
     // CONTACT
     contactEmail:    "pmwebdesignco@gmail.com",
-    contactPhone:    "",
+    contactPhone:    "", // Leave empty to hide all phone elements
 
     // FORMSPREE — get your code at formspree.io, looks like: https://formspree.io/f/XXXXXXXX
     formspreeEndpoint: "https://formspree.io/f/mnjwlwbn",
@@ -118,6 +119,9 @@ body::before {
 .rv { opacity:0; transform:translateY(26px); transition:opacity .65s var(--ease),transform .65s var(--ease); }
 .rv.in { opacity:1; transform:none; }
 .d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s} .d4{transition-delay:.32s}
+
+/* hide class for conditional elements */
+.hidden { display:none!important; }
 
 /* ===== NAV ===== */
 nav {
@@ -680,7 +684,7 @@ footer { background:oklch(10% .007 240); border-top:1px solid oklch(100% 0 0 / .
         <p class="s-body rv" style="margin-top:13px;font-size:.91rem">Tell me about your business and what you need. I'll get back to you within one business day — no sales pitch, just a real conversation.</p>
       </div>
       <div class="con-det rv"><span class="cl">Email</span><span class="cv" id="ce"></span></div>
-      <div class="con-det rv"><span class="cl">Phone</span><span class="cv" id="cp"></span></div>
+      <div class="con-det rv con-det-phone"><span class="cl">Phone</span><span class="cv" id="cp"></span></div>
     </div>
     <form class="con-form rv" id="cf">
       <div class="f-row">
@@ -721,11 +725,26 @@ const APR_HTML = aprEl ? aprEl.textContent : '';
 // ─── Apply config ───
 document.title = CONFIG.tabTitle;
 document.getElementById('page-desc').content = CONFIG.metaDescription;
+
+// Favicon support
+if (CONFIG.faviconUrl) {
+  const link = document.createElement('link');
+  link.rel = 'icon';
+  link.href = CONFIG.faviconUrl;
+  document.head.appendChild(link);
+}
+
 document.getElementById('nl').innerHTML = CONFIG.businessName.replace(/\s/,'<b>.</b>');
 document.getElementById('he').textContent = CONFIG.businessName + ' — Custom Web Design';
 document.getElementById('hs').textContent = CONFIG.subTagline;
 document.getElementById('ce').textContent = CONFIG.contactEmail;
 document.getElementById('cp').textContent = CONFIG.contactPhone;
+
+// Hide phone elements if no phone number
+if (!CONFIG.contactPhone || CONFIG.contactPhone.trim() === '') {
+  document.querySelectorAll('.con-det-phone').forEach(el => el.classList.add('hidden'));
+}
+
 document.getElementById('flo').innerHTML = CONFIG.businessName.replace(/\s/,'<b>.</b>');
 document.getElementById('fco').textContent = `© ${new Date().getFullYear()} ${CONFIG.businessName}. All rights reserved.`;
 const fs = document.getElementById('fso');
@@ -948,3 +967,4 @@ document.getElementById('cf').addEventListener('submit', async function(e){
 });
 </script>
 </body>
+</html>
