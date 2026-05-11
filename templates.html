@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Template Showcase | PM Web Design</title>
+<meta name="description" content="Browse our collection of custom website templates and mockups built for small businesses." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --ink:    oklch(14% 0.008 240);
+  --ink-2:  oklch(20% 0.009 240);
+  --ink-3:  oklch(27% 0.010 240);
+  --mist:   oklch(50% 0.012 240);
+  --mist-2: oklch(67% 0.010 240);
+  --paper:  oklch(97% 0.004 240);
+  --accent: oklch(63% 0.210 145);
+  --acc-2:  oklch(73% 0.180 145);
+  --warn:   oklch(71% 0.190  55);
+  --ff-d: 'Bebas Neue', sans-serif;
+  --ff-b: 'DM Sans', sans-serif;
+  --ff-m: 'DM Mono', monospace;
+  --ease: cubic-bezier(0.16,1,0.3,1);
+  --r: 4px;
+  --mw: 1180px;
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+@media(prefers-reduced-motion:no-preference){ html { scroll-behavior:smooth; } }
+:focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
+
+body {
+  background:var(--ink); color:var(--paper);
+  font-family:var(--ff-b); font-size:clamp(15px,1.1vw,17px);
+  line-height:1.65; overflow-x:hidden; -webkit-font-smoothing:antialiased;
+}
+
+a { color:inherit; text-decoration:none; }
+button,input,textarea { font:inherit; }
+
+/* noise */
+body::before {
+  content:''; position:fixed; inset:0; z-index:8000; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulance type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:160px; opacity:0.025; mix-blend-mode:overlay;
+}
+
+/* ===== NAV ===== */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:300;
+  padding:18px clamp(18px,4vw,52px);
+  display:flex; align-items:center; justify-content:space-between;
+  background:oklch(14% 0.008 240 / 0.93);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid oklch(100% 0 0 / 0.05);
+}
+
+.n-logo { 
+  font-family:var(--ff-d); font-size:1.4rem; letter-spacing:.07em; 
+  color:var(--paper); flex-shrink:0; 
+}
+.n-logo b { color:var(--accent); font-weight:400; }
+
+.n-links { display:flex; gap:30px; align-items:center; }
+.n-links a { 
+  font-size:.76rem; font-weight:500; letter-spacing:.13em; 
+  text-transform:uppercase; color:var(--mist-2); transition:color .2s; 
+}
+.n-links a:hover { color:var(--paper); }
+
+.n-cta { 
+  background:var(--accent)!important; color:var(--ink)!important; 
+  padding:9px 20px; border-radius:var(--r); 
+  transition:background .2s,transform .25s var(--ease)!important; 
+}
+.n-cta:hover { 
+  background:var(--acc-2)!important; 
+  transform:translateY(-1px)!important; 
+}
+
+.ham { 
+  display:none; flex-direction:column; gap:5px; 
+  background:none; border:none; cursor:pointer; padding:4px; 
+}
+.ham span { 
+  display:block; width:22px; height:1.5px; background:var(--paper); 
+  border-radius:1px; transition:transform .3s,opacity .3s; 
+}
+
+.mob-nav { 
+  display:none; position:fixed; inset:0; z-index:290; 
+  background:var(--ink); flex-direction:column; 
+  align-items:center; justify-content:center; gap:32px; 
+}
+.mob-nav.open { display:flex; }
+.mob-nav a { 
+  font-family:var(--ff-d); font-size:clamp(2.2rem,8vw,3.5rem); 
+  letter-spacing:.08em; text-transform:uppercase; 
+  color:var(--paper); transition:color .2s; 
+}
+.mob-nav a:hover { color:var(--accent); }
+
+@media(max-width:760px){
+  .ham { display:flex; }
+  .n-links { display:none; }
+}
+
+/* ===== HEADER ===== */
+.header {
+  padding:clamp(100px,12vw,140px) clamp(18px,4vw,52px) clamp(60px,8vw,80px);
+  max-width:var(--mw); margin:0 auto;
+}
+
+.back-link {
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--ff-m); font-size:.7rem; font-weight:500;
+  letter-spacing:.12em; text-transform:uppercase;
+  color:var(--mist-2); margin-bottom:24px;
+  transition:color .2s;
+}
+.back-link:hover { color:var(--paper); }
+.back-link svg { width:12px; height:12px; }
+
+.h-tag {
+  font-family:var(--ff-m); font-size:.68rem; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--accent); margin-bottom:10px;
+}
+
+.h-title {
+  font-family:var(--ff-d); font-size:clamp(3rem,8vw,5rem);
+  line-height:.96; letter-spacing:.02em; text-transform:uppercase;
+  color:var(--paper); max-width:18ch; margin-bottom:clamp(16px,2.5vw,24px);
+}
+
+.h-desc {
+  font-size:clamp(.93rem,1.4vw,1.1rem); color:var(--mist-2);
+  max-width:58ch; margin-bottom:clamp(28px,4vw,40px);
+}
+
+/* ===== TEMPLATES GRID ===== */
+.templates {
+  padding:clamp(60px,10vw,100px) clamp(18px,4vw,52px);
+  background:var(--ink-2); border-top:1px solid oklch(100% 0 0 / .04);
+}
+
+.t-container { max-width:var(--mw); margin:0 auto; }
+
+.t-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr));
+  gap:clamp(32px,5vw,56px);
+}
+
+/* Template Card */
+.t-card {
+  background:var(--ink-3);
+  border:1px solid oklch(100% 0 0 / .06);
+  border-radius:var(--r);
+  overflow:hidden;
+  transition:transform .3s var(--ease),border-color .3s;
+}
+
+.t-card:hover {
+  transform:translateY(-4px);
+  border-color:oklch(100% 0 0 / .12);
+}
+
+.t-preview {
+  position:relative;
+  aspect-ratio:16/10;
+  background:var(--ink);
+  overflow:hidden;
+  cursor:pointer;
+}
+
+.t-preview iframe {
+  width:100%; height:100%;
+  border:none; pointer-events:none;
+}
+
+.t-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(180deg,transparent 50%,var(--ink-3) 100%);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; transition:opacity .3s;
+}
+
+.t-card:hover .t-overlay { opacity:1; }
+
+.preview-btn {
+  background:var(--accent); color:var(--ink);
+  font-family:var(--ff-m); font-size:.7rem; font-weight:500;
+  letter-spacing:.12em; text-transform:uppercase;
+  padding:10px 20px; border-radius:var(--r);
+  border:none; cursor:pointer;
+  display:flex; align-items:center; gap:8px;
+  transition:all .25s var(--ease);
+}
+
+.preview-btn:hover {
+  background:var(--acc-2);
+  transform:translateY(-2px);
+  box-shadow:0 6px 18px oklch(0% 0 0 / .3);
+}
+
+.preview-btn svg { width:11px; height:11px; }
+
+.t-info {
+  padding:clamp(24px,4vw,32px);
+  display:flex; flex-direction:column; gap:14px;
+}
+
+.t-type {
+  font-family:var(--ff-m); font-size:.66rem;
+  letter-spacing:.18em; text-transform:uppercase;
+  color:var(--accent);
+}
+
+.t-name {
+  font-family:var(--ff-d); font-size:clamp(1.6rem,3vw,2rem);
+  letter-spacing:.03em; text-transform:uppercase;
+  color:var(--paper); line-height:1.1;
+}
+
+.t-desc {
+  font-size:.88rem; color:var(--mist-2);
+  line-height:1.6;
+}
+
+.t-tags {
+  display:flex; gap:8px; flex-wrap:wrap;
+  padding-top:12px; border-top:1px solid oklch(100% 0 0 / .06);
+}
+
+.t-tag {
+  font-family:var(--ff-m); font-size:.66rem;
+  letter-spacing:.1em; text-transform:uppercase;
+  color:var(--mist); background:var(--ink);
+  padding:6px 12px; border-radius:3px;
+}
+
+/* ===== MODAL ===== */
+.modal {
+  position:fixed; inset:0; z-index:9999;
+  background:oklch(0% 0 0 / .92);
+  backdrop-filter:blur(10px);
+  display:flex; align-items:center; justify-content:center;
+  padding:20px; opacity:0; pointer-events:none;
+  transition:opacity .3s;
+}
+
+.modal.open { opacity:1; pointer-events:all; }
+
+.modal-content {
+  background:var(--ink-2);
+  border:1px solid oklch(100% 0 0 / .08);
+  border-radius:var(--r);
+  width:100%; max-width:1400px; max-height:90vh;
+  display:flex; flex-direction:column;
+  overflow:hidden; position:relative;
+}
+
+.modal-header {
+  padding:18px 24px;
+  border-bottom:1px solid oklch(100% 0 0 / .06);
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--ink-3);
+}
+
+.modal-title {
+  font-family:var(--ff-d); font-size:1.4rem;
+  letter-spacing:.05em; text-transform:uppercase;
+  color:var(--paper);
+}
+
+.modal-close {
+  background:none; border:none;
+  color:var(--paper); font-size:1.6rem;
+  cursor:pointer; padding:4px 8px;
+  line-height:1; transition:color .2s;
+  border-radius:var(--r);
+}
+
+.modal-close:hover {
+  color:var(--accent);
+  background:oklch(100% 0 0 / .04);
+}
+
+.modal-body {
+  flex:1; overflow:auto;
+  position:relative; background:var(--ink);
+}
+
+.modal-body iframe {
+  width:100%; height:100%;
+  border:none; display:block;
+  min-height:600px;
+}
+
+@media(max-width:760px){
+  .modal { padding:0; }
+  .modal-content {
+    max-width:100%; max-height:100vh;
+    border-radius:0;
+  }
+  .modal-body iframe { min-height:70vh; }
+}
+
+/* ===== CTA SECTION ===== */
+.cta-section {
+  padding:clamp(60px,10vw,100px) clamp(18px,4vw,52px);
+  background:var(--ink);
+  border-top:1px solid oklch(100% 0 0 / .04);
+}
+
+.cta-container {
+  max-width:var(--mw); margin:0 auto;
+  background:var(--ink-2);
+  border:1px solid oklch(100% 0 0 / .06);
+  border-radius:var(--r);
+  padding:clamp(40px,6vw,60px) clamp(28px,4vw,52px);
+  display:flex; flex-direction:column; align-items:center;
+  text-align:center; gap:24px;
+}
+
+.cta-tag {
+  font-family:var(--ff-m); font-size:.68rem; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--accent);
+}
+
+.cta-title {
+  font-family:var(--ff-d); font-size:clamp(2.2rem,5vw,3.2rem);
+  line-height:1; letter-spacing:.02em; text-transform:uppercase;
+  color:var(--paper); max-width:22ch;
+}
+
+.cta-desc {
+  font-size:clamp(.93rem,1.3vw,1.05rem); color:var(--mist-2);
+  max-width:52ch; line-height:1.7;
+}
+
+.cta-btns {
+  display:flex; gap:14px; flex-wrap:wrap;
+  justify-content:center; margin-top:12px;
+}
+
+.cta-btn {
+  font-family:var(--ff-m); font-size:.78rem; font-weight:500;
+  letter-spacing:.12em; text-transform:uppercase;
+  padding:14px 30px; border-radius:var(--r);
+  border:none; cursor:pointer;
+  transition:all .3s var(--ease);
+  display:inline-flex; align-items:center; gap:10px;
+}
+
+.cta-btn-primary {
+  background:var(--accent); color:var(--ink);
+}
+
+.cta-btn-primary:hover {
+  background:var(--acc-2);
+  transform:translateY(-2px);
+  box-shadow:0 7px 20px oklch(63% .21 145 / .2);
+}
+
+.cta-btn-secondary {
+  background:transparent; color:var(--paper);
+  border:1px solid oklch(100% 0 0 / .16);
+}
+
+.cta-btn-secondary:hover {
+  background:oklch(100% 0 0 / .04);
+  border-color:var(--paper);
+  transform:translateY(-2px);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background:var(--ink);
+  border-top:1px solid oklch(100% 0 0 / .04);
+  padding:clamp(32px,5vw,48px) clamp(18px,4vw,52px);
+}
+
+.footer-in {
+  max-width:var(--mw); margin:0 auto;
+  display:flex; justify-content:space-between;
+  align-items:center; gap:24px; flex-wrap:wrap;
+}
+
+.f-logo {
+  font-family:var(--ff-d); font-size:1.2rem;
+  letter-spacing:.07em; color:var(--paper);
+}
+.f-logo b { color:var(--accent); font-weight:400; }
+
+.f-copy {
+  font-size:.76rem; color:var(--mist);
+  font-family:var(--ff-m); letter-spacing:.08em;
+}
+
+@media(max-width:760px){
+  .footer-in {
+    flex-direction:column;
+    text-align:center;
+  }
+  .cta-btns {
+    flex-direction:column;
+    width:100%;
+  }
+  .cta-btn {
+    width:100%;
+    justify-content:center;
+  }
+}
+</style>
+</head>
+
+<body>
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="n-logo"><b>PM</b> WEB DESIGN</a>
+  <div class="n-links">
+    <a href="index.html#services">Services</a>
+    <a href="index.html#work">Work</a>
+    <a href="index.html#process">Process</a>
+    <a href="index.html#contact" class="n-cta">Get Started</a>
+  </div>
+  <button class="ham" id="ham" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mob-nav" id="mob">
+  <a href="index.html#services" onclick="cm()">Services</a>
+  <a href="index.html#work" onclick="cm()">Work</a>
+  <a href="index.html#process" onclick="cm()">Process</a>
+  <a href="index.html#contact" onclick="cm()">Contact</a>
+</div>
+
+<!-- HEADER -->
+<section class="header">
+  <a href="index.html" class="back-link">
+    <svg viewBox="0 0 12 12" fill="none">
+      <path d="M10 6H2M5 3L2 6l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Back to Home
+  </a>
+  <div class="h-tag">Template Gallery</div>
+  <h1 class="h-title">Design Mockups</h1>
+  <p class="h-desc">
+    Browse our collection of custom templates. Each one is built to showcase different styles and approaches — from modern SaaS vibes to editorial boutique feels. These are examples I show clients to help them visualize what's possible.
+  </p>
+</section>
+
+<!-- TEMPLATES -->
+<section class="templates">
+  <div class="t-container">
+    <div class="t-grid">
+      
+      <!-- Modern SaaS Template -->
+      <div class="t-card">
+        <div class="t-preview" onclick="openModal('Modern SaaS Template', 'Modern_SaaS_Mockup_Template.html')">
+          <iframe src="Modern_SaaS_Mockup_Template.html" scrolling="no"></iframe>
+          <div class="t-overlay">
+            <button class="preview-btn">
+              <svg viewBox="0 0 11 11" fill="none">
+                <path d="M1 5.5h9M7 2l3 3.5L7 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              View Full Template
+            </button>
+          </div>
+        </div>
+        <div class="t-info">
+          <div class="t-type">Modern / SaaS</div>
+          <h2 class="t-name">Tech-Forward Template</h2>
+          <p class="t-desc">
+            Clean, modern design with gradient accents and smooth animations. Built for service businesses that want to look current and book online — HVAC, cleaning, contractors, gyms, etc.
+          </p>
+          <div class="t-tags">
+            <span class="t-tag">Gradients</span>
+            <span class="t-tag">Call-to-Action</span>
+            <span class="t-tag">Modern</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Editorial Template -->
+      <div class="t-card">
+        <div class="t-preview" onclick="openModal('Editorial Boutique Template', 'Editorial_Mockup_Template.html')">
+          <iframe src="Editorial_Mockup_Template.html" scrolling="no"></iframe>
+          <div class="t-overlay">
+            <button class="preview-btn">
+              <svg viewBox="0 0 11 11" fill="none">
+                <path d="M1 5.5h9M7 2l3 3.5L7 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              View Full Template
+            </button>
+          </div>
+        </div>
+        <div class="t-info">
+          <div class="t-type">Editorial / Premium</div>
+          <h2 class="t-name">Dark Editorial Template</h2>
+          <p class="t-desc">
+            High-end, boutique aesthetic with dark tones and elegant typography. Perfect for upscale restaurants, design studios, salons, photographers — anywhere premium matters.
+          </p>
+          <div class="t-tags">
+            <span class="t-tag">Dark Mode</span>
+            <span class="t-tag">Premium</span>
+            <span class="t-tag">Editorial</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+  <div class="cta-container">
+    <div class="cta-tag">Ready to Go Custom?</div>
+    <h2 class="cta-title">Let's build your site from scratch</h2>
+    <p class="cta-desc">
+      These templates show what's possible — but your business deserves something built just for you. Let's talk about what you need and build a site that works.
+    </p>
+    <div class="cta-btns">
+      <a href="index.html#contact" class="cta-btn cta-btn-primary">
+        Start a Project
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+          <path d="M1 5.5h9M7 2l3 3.5L7 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="index.html" class="cta-btn cta-btn-secondary">
+        Back to Home
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+          <path d="M1 5.5h9M7 2l3 3.5L7 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-in">
+    <div class="f-logo"><b>PM</b> WEB DESIGN</div>
+    <div class="f-copy">© 2025 PM Web Design. Hand-coded in Buffalo, NY.</div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title"></div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <iframe id="modal-frame" title="Template preview"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+// Mobile menu
+const hamBtn = document.getElementById('ham');
+const mobNav = document.getElementById('mob');
+
+hamBtn.addEventListener('click', () => {
+  const isOpen = mobNav.classList.contains('open');
+  if (isOpen) {
+    mobNav.classList.remove('open');
+    hamBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  } else {
+    mobNav.classList.add('open');
+    hamBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+});
+
+function cm() {
+  mobNav.classList.remove('open');
+  hamBtn.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && mobNav.classList.contains('open')) cm();
+});
+
+mobNav.addEventListener('click', e => {
+  if (e.target === mobNav) cm();
+});
+
+// Modal
+function openModal(title, src) {
+  const modal = document.getElementById('modal');
+  const frame = document.getElementById('modal-frame');
+  const modalTitle = document.getElementById('modal-title');
+  
+  modalTitle.textContent = title;
+  frame.src = src;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  const modal = document.getElementById('modal');
+  const frame = document.getElementById('modal-frame');
+  
+  modal.classList.remove('open');
+  frame.src = '';
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+</body>
+</html>

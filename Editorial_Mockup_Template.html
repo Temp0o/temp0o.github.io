@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>[BUSINESS NAME] — Editorial Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       EDITORIAL / BOUTIQUE MOCKUP
+       ============================================================
+       Best for: high-end restaurants, boutique shops, design studios,
+       salons, photographers, anything where "premium" matters more
+       than "approachable."
+
+       HOW TO CUSTOMIZE:
+       1. Replace [PLACEHOLDER] text with real business info.
+       2. Change --accent to their brand color (default is rich oxblood).
+       3. Swap hero/feature image URLs for their photos.
+       4. Update menu/feature blocks to fit the business.
+       5. Save as "[Business Name] Mockup.html" and send.
+       ============================================================ */
+
+    :root {
+      --bg: #0e0e0c;
+      --bg-soft: #16140f;
+      --text: #f3efe6;
+      --text-muted: #a39f93;
+      --accent: #c14d3d;       /* CHANGE — main brand accent */
+      --accent-soft: #e6b8a8;
+      --line: rgba(243, 239, 230, 0.12);
+      --serif: 'Fraunces', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 22px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: rgba(14, 14, 12, 0.7);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-reservation {
+      border: 1px solid var(--text);
+      padding: 10px 22px;
+      border-radius: 0;
+      transition: all 0.25s;
+    }
+
+    .nav-reservation:hover {
+      background: var(--text);
+      color: var(--bg) !important;
+    }
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      align-items: center;
+      gap: 60px;
+      padding: 140px 48px 80px;
+      position: relative;
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--accent);
+      font-size: 1.05rem;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 40px; height: 1px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      margin-bottom: 32px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .hero-lede {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin-bottom: 44px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 32px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--text);
+    }
+
+    .btn-primary:hover {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .btn-ghost {
+      color: var(--text);
+      background: transparent;
+      border-bottom: 1px solid var(--text);
+      padding: 8px 0;
+    }
+
+    .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
+
+    .hero-image {
+      position: relative;
+      height: 80vh;
+      max-height: 720px;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.1) contrast(1.05);
+    }
+
+    .hero-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(14,14,12,0.6) 100%);
+    }
+
+    .hero-caption {
+      position: absolute;
+      bottom: 24px; left: 24px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--text);
+      z-index: 2;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── MARQUEE ─────────────────────────────────────── */
+    .marquee {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 22px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .marquee-track {
+      display: inline-block;
+      animation: scroll 40s linear infinite;
+    }
+
+    .marquee-track span {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--text-muted);
+      margin: 0 32px;
+    }
+
+    .marquee-track span.dot {
+      color: var(--accent);
+    }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── PHILOSOPHY (split asymmetric) ───────────────── */
+    .philosophy {
+      padding: 140px 48px;
+      max-width: 1320px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 100px;
+      align-items: start;
+    }
+
+    .section-label {
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--accent);
+      font-size: 1rem;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 30px; height: 1px;
+      background: var(--accent);
+    }
+
+    .philosophy h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      position: sticky;
+      top: 120px;
+    }
+
+    .philosophy h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .philosophy-body p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.8;
+      max-width: 560px;
+    }
+
+    .philosophy-body p:first-child::first-letter {
+      font-family: var(--serif);
+      font-size: 4.5rem;
+      float: left;
+      line-height: 0.85;
+      padding: 6px 14px 0 0;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .philosophy-meta {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--line);
+    }
+
+    .meta-stat .num {
+      font-family: var(--serif);
+      font-size: 2.6rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .meta-stat .label {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── MENU / FEATURE LIST ─────────────────────────── */
+    .menu {
+      background: var(--bg-soft);
+      padding: 140px 48px;
+    }
+
+    .menu-inner { max-width: 1100px; margin: 0 auto; }
+
+    .menu-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .menu-header h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      letter-spacing: -0.02em;
+      margin-top: 16px;
+    }
+
+    .menu-header h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 32px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: center;
+      transition: padding 0.3s;
+    }
+
+    .menu-item:hover {
+      padding-left: 16px;
+    }
+
+    .menu-item:hover .item-title {
+      color: var(--accent);
+    }
+
+    .menu-num {
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--accent);
+      font-size: 1.4rem;
+    }
+
+    .item-title {
+      font-family: var(--serif);
+      font-size: 1.7rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+      transition: color 0.25s;
+    }
+
+    .item-desc {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      max-width: 560px;
+    }
+
+    .item-price {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      color: var(--text);
+    }
+
+    /* ── FEATURE GALLERY ─────────────────────────────── */
+    .gallery {
+      padding: 140px 48px;
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+
+    .gallery-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .gallery-header h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.02em;
+      max-width: 600px;
+      line-height: 1.05;
+    }
+
+    .gallery-header h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1.1fr;
+      grid-template-rows: 280px 280px;
+      gap: 16px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+      filter: saturate(1.05);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.06);
+    }
+
+    .gallery-item.tall { grid-row: span 2; }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 16px; left: 18px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--text);
+      z-index: 2;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+    }
+
+    /* ── PRESS / TESTIMONIAL ─────────────────────────── */
+    .press {
+      background: var(--bg-soft);
+      padding: 120px 48px;
+      text-align: center;
+    }
+
+    .press-inner { max-width: 880px; margin: 0 auto; }
+
+    .press blockquote {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      margin: 32px 0;
+    }
+
+    .press blockquote::before,
+    .press blockquote::after {
+      content: '"';
+      color: var(--accent);
+      font-size: 1.4em;
+      vertical-align: -0.2em;
+    }
+
+    .press cite {
+      font-style: normal;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .press cite strong {
+      color: var(--text);
+      font-weight: 600;
+      margin-right: 8px;
+    }
+
+    /* ── RESERVATION ─────────────────────────────────── */
+    .reservation {
+      padding: 140px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .reservation-info h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .reservation-info h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .reservation-info > p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 40px;
+      max-width: 460px;
+    }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      padding: 22px 0;
+      border-top: 1px solid var(--line);
+      align-items: start;
+    }
+
+    .info-row:last-of-type { border-bottom: 1px solid var(--line); }
+
+    .info-row .label-text {
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--accent);
+      font-size: 0.95rem;
+    }
+
+    .info-row .value-text {
+      color: var(--text);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    .info-row .value-text small {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 4px;
+    }
+
+    .reservation-form {
+      background: var(--bg-soft);
+      padding: 48px;
+      border: 1px solid var(--line);
+    }
+
+    .reservation-form h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .reservation-form p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 32px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .form-group { margin-bottom: 18px; }
+
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 0.98rem;
+      padding: 10px 0;
+      outline: none;
+      transition: border-color 0.25s;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .form-group select { color: var(--text); }
+    .form-group select option { background: var(--bg-soft); }
+
+    .form-submit {
+      width: 100%;
+      padding: 18px;
+      background: var(--accent);
+      color: var(--text);
+      border: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: background 0.25s;
+    }
+
+    .form-submit:hover { background: var(--text); color: var(--bg); }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 60px 48px 30px;
+    }
+
+    .footer-grid {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .footer-brand h3 {
+      font-family: var(--serif);
+      font-weight: 800;
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+    }
+    .footer-brand h3 span { color: var(--accent); font-style: italic; }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 320px;
+      line-height: 1.7;
+    }
+
+    .footer-col h4 {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .footer-col a, .footer-col p {
+      display: block;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: var(--accent); }
+
+    .footer-bottom {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { gap: 18px; }
+      .nav-links li:nth-child(1),
+      .nav-links li:nth-child(2),
+      .nav-links li:nth-child(3) { display: none; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 120px 24px 60px;
+        gap: 40px;
+      }
+      .hero-image { height: 60vh; }
+
+      .philosophy {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 80px 24px;
+      }
+      .philosophy h2 { position: static; }
+      .philosophy-meta { grid-template-columns: 1fr; gap: 24px; }
+
+      .menu { padding: 80px 24px; }
+      .menu-item { grid-template-columns: 50px 1fr; }
+      .item-price { grid-column: 2; padding-top: 8px; }
+
+      .gallery { padding: 80px 24px; }
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 200px 200px 200px;
+      }
+      .gallery-item.tall { grid-row: span 1; }
+      .gallery-item:nth-child(5) { grid-column: span 2; }
+
+      .press { padding: 80px 24px; }
+      .reservation {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 80px 24px;
+      }
+      .reservation-form { padding: 32px; }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Hearth <span>&amp;</span> Ember</div>
+    <ul class="nav-links">
+      <li><a href="#philosophy">The House</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#reserve">Visit</a></li>
+      <li><a href="#reserve" class="nav-reservation">Reserve</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Established 2014 · Buffalo, NY</div>
+      <h1>Slow fire,<br/><em>steady hands,</em><br/>true flavor.</h1>
+      <p class="hero-lede">An open-hearth steakhouse on Allen Street, where dry-aged beef, wood smoke, and a 200-bottle cellar come together six nights a week.</p>
+      <div class="hero-actions">
+        <a href="#reserve" class="btn btn-primary">Reserve a Table →</a>
+        <a href="#menu" class="btn btn-ghost">View the Menu</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=1200&q=85" alt="Wood-fired steak"/>
+      <div class="hero-caption">No. 14 — The cut of the night</div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>Wood-fired</span><span class="dot">●</span>
+      <span>Dry-aged in-house</span><span class="dot">●</span>
+      <span>200-bottle cellar</span><span class="dot">●</span>
+      <span>Open six nights</span><span class="dot">●</span>
+      <span>Allen Street, Buffalo</span><span class="dot">●</span>
+      <span>Wood-fired</span><span class="dot">●</span>
+      <span>Dry-aged in-house</span><span class="dot">●</span>
+      <span>200-bottle cellar</span><span class="dot">●</span>
+      <span>Open six nights</span><span class="dot">●</span>
+      <span>Allen Street, Buffalo</span><span class="dot">●</span>
+    </div>
+  </div>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy" id="philosophy">
+    <div>
+      <div class="section-label">The House</div>
+      <h2>A room built around <em>one fire</em>.</h2>
+    </div>
+    <div class="philosophy-body">
+      <p>Hearth &amp; Ember opened in a brick-walled storefront on Allen Street with a single conviction: that great steak doesn't need much. A live oak fire. Beef aged for forty days in our own cellar. Salt, pepper, time. The room is small on purpose — twenty-eight seats, one fire, one chef at the pass.</p>
+      <p>Our menu changes with what comes in from local farms and what's hanging in the aging room. The wine list runs deep on Old World reds and small American producers. Cocktails lean classic. Everything you see was made by someone you can wave to from your seat.</p>
+      <div class="philosophy-meta">
+        <div class="meta-stat">
+          <div class="num">40</div>
+          <div class="label">Days Dry-Aged</div>
+        </div>
+        <div class="meta-stat">
+          <div class="num">28</div>
+          <div class="label">Seats Per Night</div>
+        </div>
+        <div class="meta-stat">
+          <div class="num">11</div>
+          <div class="label">Years on Allen St.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu" id="menu">
+    <div class="menu-inner">
+      <div class="menu-header">
+        <div class="section-label" style="justify-content:center;">Tonight's Selections</div>
+        <h2>From the <em>fire</em>.</h2>
+      </div>
+      <div class="menu-list">
+        <div class="menu-item">
+          <div class="menu-num">01</div>
+          <div>
+            <div class="item-title">Bone-In Ribeye</div>
+            <div class="item-desc">28-day dry-aged, 22 oz, finished over oak embers with bone marrow butter and flaked salt.</div>
+          </div>
+          <div class="item-price">$72</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-num">02</div>
+          <div>
+            <div class="item-title">Hanger, Charred</div>
+            <div class="item-desc">Grass-fed hanger steak, blistered shishito, smoked chimichurri, charred lemon.</div>
+          </div>
+          <div class="item-price">$48</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-num">03</div>
+          <div>
+            <div class="item-title">Whole Branzino</div>
+            <div class="item-desc">Roasted in the hearth, served with brown butter, capers, and shaved fennel.</div>
+          </div>
+          <div class="item-price">$54</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-num">04</div>
+          <div>
+            <div class="item-title">Short Rib, Braised</div>
+            <div class="item-desc">Three-hour braise in red wine and aromatics, soft polenta, gremolata.</div>
+          </div>
+          <div class="item-price">$46</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-num">05</div>
+          <div>
+            <div class="item-title">Hearth-Roasted Carrots</div>
+            <div class="item-desc">Local heirloom carrots, sumac yogurt, dukkah, herb oil. A side worth ordering twice.</div>
+          </div>
+          <div class="item-price">$14</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="gallery-header">
+      <div>
+        <div class="section-label">Inside the Room</div>
+        <h2>Brick walls, candlelight, <em>one open fire</em>.</h2>
+      </div>
+      <a href="#reserve" class="btn btn-ghost">Reserve a Table →</a>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item tall">
+        <img src="https://images.unsplash.com/photo-1546964124-0cce460f38ef?w=900&q=85" alt="Dining room"/>
+        <div class="gallery-caption">The dining room at dusk</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=700&q=85" alt="Wine"/>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=700&q=85" alt="Plate"/>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1485921325833-c519f76c4927?w=700&q=85" alt="Cocktail"/>
+        <div class="gallery-caption">House Old Fashioned</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&q=85" alt="Bar"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESS -->
+  <section class="press">
+    <div class="press-inner">
+      <div class="section-label" style="justify-content:center;">In the Press</div>
+      <blockquote>Hearth &amp; Ember is doing the most precise, restrained, fire-driven cooking in Western New York — and the room feels like a secret you're glad you found.</blockquote>
+      <cite><strong>Buffalo Spree</strong>· Restaurant of the Year, 2024</cite>
+    </div>
+  </section>
+
+  <!-- RESERVATION -->
+  <section class="reservation" id="reserve">
+    <div class="reservation-info">
+      <div class="section-label">Visit</div>
+      <h2>Plan your <em>evening</em>.</h2>
+      <p>We seat in two services Tuesday through Sunday. Reservations open thirty days out and the room fills quickly. We hold a few seats at the bar each night for walk-ins.</p>
+
+      <div class="info-row">
+        <div class="label-text">Address</div>
+        <div class="value-text">
+          218 Allen Street<br/>
+          <small>Buffalo, NY 14201</small>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="label-text">Hours</div>
+        <div class="value-text">
+          Tuesday — Sunday · 5:00 to 10:00 pm
+          <small>Closed Monday</small>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="label-text">Phone</div>
+        <div class="value-text">
+          (716) 555-0148
+          <small>For parties of six or more</small>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="label-text">Private Events</div>
+        <div class="value-text">
+          events@hearthember.co
+          <small>Buyouts &amp; chef's table available</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="reservation-form">
+      <h3>Request a Reservation</h3>
+      <p>We'll confirm by email within 24 hours.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Jane"/>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="jane@example.com"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date"/>
+        </div>
+        <div class="form-group">
+          <label>Party Size</label>
+          <select>
+            <option>2 guests</option>
+            <option>3 guests</option>
+            <option>4 guests</option>
+            <option>5 guests</option>
+            <option>6+ guests</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Notes (optional)</label>
+        <textarea rows="3" placeholder="Anniversary, allergies, anything we should know..."></textarea>
+      </div>
+      <button class="form-submit">Request Reservation</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Hearth <span>&amp;</span> Ember</h3>
+        <p>An open-hearth steakhouse on Allen Street. Wood, fire, salt, time.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Visit</h4>
+        <p>218 Allen Street</p>
+        <p>Buffalo, NY 14201</p>
+        <p>(716) 555-0148</p>
+      </div>
+      <div class="footer-col">
+        <h4>Hours</h4>
+        <p>Tue — Sun</p>
+        <p>5:00 — 10:00 pm</p>
+      </div>
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <a href="#">Instagram</a>
+        <a href="#">OpenTable</a>
+        <a href="#">Newsletter</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Hearth &amp; Ember Restaurant Group</span>
+      <span>Site by PM Web Design · Buffalo, NY</span>
+    </div>
+  </footer>
+
+</body>
+</html>
