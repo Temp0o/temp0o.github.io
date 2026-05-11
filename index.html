@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ============================================================
+     PM WEB DESIGN — CONFIGURATION PANEL
+     Edit everything here. No need to dig through code.
+     ============================================================ -->
+<script>
+  const CONFIG = {
+
+    // TAB & META
+    tabTitle:        "PM Web Design | Professional Websites for Small Businesses",
+    metaDescription: "PM Web Design builds fast, beautiful custom websites for small businesses. Mobile-first, hand-coded, built to convert.",
+
+    // BRAND
+    ownerName:       "Peter M",
+    businessName:    "PM Web Design",
+    subTagline:      "Custom-built websites for small businesses that mean business.",
+
+    // CONTACT
+    contactEmail:    "hello@pmwebdesign.com",
+    contactPhone:    "(716) 555-0101",
+
+    // FORMSPREE — get your code at formspree.io, looks like: https://formspree.io/f/XXXXXXXX
+    formspreeEndpoint: "https://formspree.io/f/YOUR_FORM_ID",
+
+    // PORTFOLIO PROJECTS
+    // published: true  → iframe preview + "Visit Live Site" button
+    // published: false → uses embedded local HTML preview (if available) + "Coming Soon" badge
+    // When a site goes live: set published=true, add url and previewUrl, done.
+    projects: [
+      {
+        title:      "Nick Malamas Coaching",
+        subtitle:   "Men's Life Coaching",
+        desc:       "A bold, conversion-focused site for a men's life coach. Built to attract serious clients and communicate authority from the first scroll.",
+        url:        "https://nickmalamas.com/",
+        previewUrl: "https://nickmalamas.com/",
+        tags:       ["Life Coaching", "Landing Page", "Conversion"],
+        published:  true,
+      },
+      // Add more projects by copying a block above ↑
+    ],
+
+    // SERVICES
+    services: [
+      { icon: "◈", title: "Brand-New Sites",    desc: "No website? You're invisible to customers searching right now. We fix that with a site that opens doors." },
+      { icon: "◉", title: "Redesigns",          desc: "Outdated or embarrassing site? We rebuild from scratch — faster, cleaner, built to convert." },
+      { icon: "◎", title: "Mobile-First Build", desc: "Over 60% of traffic is mobile. Every site we build looks flawless on any screen, any device." },
+      { icon: "◫", title: "SEO Foundations",    desc: "Built clean so search engines find you. Local SEO best practices baked in from day one." },
+    ],
+
+    // SOCIAL — leave empty to hide
+    socialLinkedIn:  "",
+    socialInstagram: "",
+    socialFacebook:  "",
+
+  };
+</script>
+<!-- ============================================================
+     END CONFIG
+     ============================================================ -->
+
+<title id="page-title"></title>
+<meta name="description" id="page-desc" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+/* ===== TOKENS ===== */
+:root {
+  --ink:    oklch(14% 0.008 240);
+  --ink-2:  oklch(20% 0.009 240);
+  --ink-3:  oklch(27% 0.010 240);
+  --mist:   oklch(50% 0.012 240);
+  --mist-2: oklch(67% 0.010 240);
+  --paper:  oklch(97% 0.004 240);
+  --accent: oklch(63% 0.210 145);
+  --acc-2:  oklch(73% 0.180 145);
+  --warn:   oklch(71% 0.190  55);
+  --ff-d: 'Bebas Neue', sans-serif;
+  --ff-b: 'DM Sans', sans-serif;
+  --ff-m: 'DM Mono', monospace;
+  --ease: cubic-bezier(0.16,1,0.3,1);
+  --r: 4px;
+  --mw: 1180px;
+}
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+@media(prefers-reduced-motion:no-preference){ html { scroll-behavior:smooth; } }
+:focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
+body {
+  background:var(--ink); color:var(--paper);
+  font-family:var(--ff-b); font-size:clamp(15px,1.1vw,17px);
+  line-height:1.65; overflow-x:hidden; -webkit-font-smoothing:antialiased;
+}
+a { color:inherit; text-decoration:none; }
+img { display:block; max-width:100%; }
+button,input,textarea { font:inherit; }
+
+/* noise */
+body::before {
+  content:''; position:fixed; inset:0; z-index:8000; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:160px; opacity:0.025; mix-blend-mode:overlay;
+}
+@media(prefers-reduced-motion:reduce){
+  .rv { opacity:1!important; transform:none!important; transition:none!important; }
+  .h-glow { animation:none!important; }
+  .t-track { animation-play-state:paused!important; }
+  .pdot { animation:none!important; }
+  *,*::before,*::after { transition-duration:.01ms!important; animation-duration:.01ms!important; }
+}
+
+/* ===== REVEAL ===== */
+.rv { opacity:0; transform:translateY(26px); transition:opacity .65s var(--ease),transform .65s var(--ease); }
+.rv.in { opacity:1; transform:none; }
+.d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s} .d4{transition-delay:.32s}
+
+/* ===== NAV ===== */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:300;
+  padding:18px clamp(18px,4vw,52px);
+  display:flex; align-items:center; justify-content:space-between;
+  transition:background .4s,padding .35s,border-color .4s;
+  border-bottom:1px solid transparent;
+}
+nav.sc {
+  background:oklch(14% 0.008 240 / 0.93);
+  backdrop-filter:blur(18px); padding-top:12px; padding-bottom:12px;
+  border-bottom-color:oklch(100% 0 0 / 0.05);
+}
+.n-logo { font-family:var(--ff-d); font-size:1.4rem; letter-spacing:.07em; color:var(--paper); flex-shrink:0; }
+.n-logo b { color:var(--accent); font-weight:400; }
+.n-links { display:flex; gap:30px; align-items:center; }
+.n-links a { font-size:.76rem; font-weight:500; letter-spacing:.13em; text-transform:uppercase; color:var(--mist-2); transition:color .2s; }
+.n-links a:hover { color:var(--paper); }
+.n-cta { background:var(--accent)!important; color:var(--ink)!important; padding:9px 20px; border-radius:var(--r); transition:background .2s,transform .25s var(--ease)!important; }
+.n-cta:hover { background:var(--acc-2)!important; transform:translateY(-1px)!important; }
+.ham { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+.ham span { display:block; width:22px; height:1.5px; background:var(--paper); border-radius:1px; transition:transform .3s,opacity .3s; }
+.ham[aria-expanded="true"] span:nth-child(1) { transform:rotate(45deg) translate(4.5px,4.5px); }
+.ham[aria-expanded="true"] span:nth-child(2) { opacity:0; transform:scaleX(0); }
+.ham[aria-expanded="true"] span:nth-child(3) { transform:rotate(-45deg) translate(4.5px,-4.5px); }
+.mob-nav { display:none; position:fixed; inset:0; z-index:290; background:var(--ink); flex-direction:column; align-items:center; justify-content:center; gap:32px; }
+.mob-nav.open { display:flex; }
+.mob-nav a { font-family:var(--ff-d); font-size:clamp(2.2rem,8vw,3.5rem); letter-spacing:.08em; text-transform:uppercase; color:var(--paper); transition:color .2s; }
+.mob-nav a:hover { color:var(--accent); }
+
+/* ===== HERO ===== */
+.hero {
+  min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end;
+  padding:clamp(80px,10vw,120px) clamp(18px,4vw,52px) clamp(56px,8vw,96px);
+  position:relative; overflow:hidden;
+}
+.h-grid {
+  position:absolute; inset:0; pointer-events:none;
+  background-image:linear-gradient(oklch(100% 0 0 / .02) 1px,transparent 1px),linear-gradient(90deg,oklch(100% 0 0 / .02) 1px,transparent 1px);
+  background-size:70px 70px;
+  mask-image:linear-gradient(to bottom,transparent 5%,black 25%,black 75%,transparent 100%);
+}
+.h-glow {
+  position:absolute; pointer-events:none;
+  width:min(680px,80vw); height:min(680px,80vw); border-radius:50%;
+  background:radial-gradient(circle,oklch(63% .21 145 / .10) 0%,transparent 68%);
+  top:-15%; right:-8%; animation:glow 9s ease-in-out infinite alternate;
+}
+@keyframes glow { from{transform:translate(0,0)} to{transform:translate(-48px,68px)} }
+.h-eye {
+  font-family:var(--ff-m); font-size:.7rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--accent); display:flex; align-items:center; gap:12px; margin-bottom:20px;
+}
+.h-eye::before { content:''; width:34px; height:1px; background:var(--accent); }
+.h1 {
+  font-family:var(--ff-d); font-size:clamp(58px,10vw,146px);
+  line-height:.91; letter-spacing:.02em; color:var(--paper); max-width:880px; margin-bottom:34px;
+}
+.h1 em { font-style:normal; color:var(--accent); }
+.h-sub { font-size:clamp(.96rem,1.4vw,1.16rem); color:var(--mist-2); max-width:450px; margin-bottom:46px; font-weight:300; line-height:1.75; }
+.h-act { display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+.btn-f {
+  display:inline-flex; align-items:center; gap:9px;
+  background:var(--accent); color:var(--ink);
+  font-weight:500; font-size:.88rem; letter-spacing:.04em;
+  padding:14px 28px; border-radius:var(--r); border:none; cursor:pointer;
+  transition:background .2s,transform .3s var(--ease),box-shadow .3s;
+}
+.btn-f:hover { background:var(--acc-2); transform:translateY(-2px); box-shadow:0 10px 26px oklch(63% .21 145 / .22); }
+.btn-f svg { transition:transform .3s var(--ease); }
+.btn-f:hover svg { transform:translateX(3px); }
+.btn-t {
+  display:inline-flex; align-items:center; gap:7px;
+  font-size:.8rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--mist-2); border-bottom:1px solid oklch(100% 0 0 / .14);
+  padding-bottom:2px; transition:color .2s,border-color .2s;
+}
+.btn-t:hover { color:var(--paper); border-color:var(--paper); }
+
+/* ===== TICKER ===== */
+.ticker { background:var(--accent); overflow:hidden; padding:9px 0; white-space:nowrap; }
+.t-track { display:inline-flex; animation:tick 30s linear infinite; }
+.t-track span { font-family:var(--ff-d); font-size:.95rem; letter-spacing:.12em; color:var(--ink); padding:0 28px; text-transform:uppercase; }
+.t-track .dot { color:oklch(14% .008 240 / .4); padding:0; }
+@keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ===== STAT BAR ===== */
+.stat-bar {
+  background:var(--ink-2);
+  border-top:1px solid oklch(100% 0 0 / .05);
+  border-bottom:1px solid oklch(100% 0 0 / .06);
+  padding:32px clamp(18px,4vw,52px);
+  display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+}
+.s-item { display:flex; flex-direction:column; gap:4px; }
+.s-num { font-family:var(--ff-d); font-size:clamp(1.9rem,3.2vw,2.9rem); letter-spacing:.04em; color:var(--paper); line-height:1; }
+.s-lab { font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--mist); }
+
+/* ===== SECTION ===== */
+section { padding:clamp(68px,9vw,126px) clamp(18px,4vw,52px); scroll-margin-top:64px; }
+.svc-sec { scroll-margin-top:64px; }
+.proc-sec { scroll-margin-top:64px; }
+.s-eye { font-family:var(--ff-m); font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--accent); display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+.s-eye::before { content:''; width:26px; height:1px; background:var(--accent); }
+.s-ttl { font-family:var(--ff-d); font-size:clamp(36px,5.5vw,74px); line-height:.93; letter-spacing:.02em; color:var(--paper); margin-bottom:16px; }
+.s-body { font-size:.98rem; color:var(--mist-2); max-width:490px; line-height:1.78; font-weight:300; }
+
+/* ===== ABOUT ===== */
+.about-g { max-width:var(--mw); margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:68px; align-items:center; }
+.a-vis { position:relative; aspect-ratio:4/5; background:var(--ink-2); border-radius:4px; overflow:hidden; }
+.a-stripe { position:absolute; left:0; top:34px; bottom:34px; width:3px; background:var(--accent); }
+.a-glyph { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--ff-d); font-size:clamp(90px,13vw,170px); color:oklch(63% .21 145 / .055); user-select:none; line-height:1; }
+.a-badge { position:absolute; bottom:26px; right:26px; background:var(--accent); color:var(--ink); padding:10px 17px; border-radius:var(--r); font-family:var(--ff-m); font-size:.7rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; }
+.a-txt { display:flex; flex-direction:column; gap:26px; }
+.a-txt p { color:var(--mist-2); line-height:1.82; font-weight:300; }
+.chk { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.chk li { display:flex; align-items:flex-start; gap:12px; font-size:.91rem; color:var(--mist-2); }
+.chk li::before { content:'→'; color:var(--accent); flex-shrink:0; margin-top:1px; }
+
+/* ===== SERVICES ===== */
+.svc-sec { background:var(--ink-2); }
+.svc-in { max-width:var(--mw); margin:0 auto; }
+.svc-hd { display:grid; grid-template-columns:1fr 1fr; gap:56px; margin-bottom:56px; align-items:end; }
+.svc-g { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; }
+.sc { background:var(--ink); padding:34px 26px; position:relative; overflow:hidden; transition:background .3s; }
+.sc::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .4s var(--ease); }
+.sc:hover { background:var(--ink-3); }
+.sc:hover::after { transform:scaleX(1); }
+.sc-ico { font-size:1.65rem; color:var(--accent); margin-bottom:18px; }
+.sc-ttl { font-family:var(--ff-d); font-size:1.4rem; letter-spacing:.04em; color:var(--paper); margin-bottom:11px; }
+.sc-dsc { font-size:.85rem; color:var(--mist-2); line-height:1.72; }
+
+/* ===== PORTFOLIO ===== */
+.port-in { max-width:var(--mw); margin:0 auto; }
+.port-hd { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:52px; flex-wrap:wrap; gap:22px; }
+.port-g { display:flex; flex-direction:column; gap:2px; }
+
+/* PROJECT CARD */
+.pc { display:grid; grid-template-columns:1fr 1fr; background:var(--ink-2); overflow:hidden; min-height:480px; }
+.pc:nth-child(even) { direction:rtl; }
+.pc:nth-child(even) > * { direction:ltr; }
+
+/* preview pane */
+.pp { position:relative; overflow:hidden; background:var(--ink-3); }
+.pi-wrap { position:absolute; inset:0; overflow:hidden; }
+.pi-wrap iframe { border:none; display:block; transform-origin:top left; pointer-events:none; }
+.pi-overlay { position:absolute; inset:0; z-index:2; }
+.pp-btn {
+  position:absolute; bottom:14px; left:50%; transform:translateX(-50%); z-index:10;
+  background:oklch(14% .008 240 / .88); border:1px solid oklch(100% 0 0 / .12);
+  color:var(--paper); font-size:.72rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase;
+  padding:7px 14px; border-radius:20px; display:flex; align-items:center; gap:6px;
+  backdrop-filter:blur(8px); opacity:0; transition:opacity .25s; cursor:pointer; white-space:nowrap;
+}
+.pc:hover .pp-btn { opacity:1; }
+
+/* placeholder — real illustration */
+.pp-ph { position:absolute; inset:0; }
+.pp-ph svg { width:100%; height:100%; }
+
+/* ── EDITORIAL body pane ── */
+.pb {
+  padding:clamp(32px,4vw,52px) clamp(28px,3.5vw,48px);
+  display:flex; flex-direction:column; justify-content:space-between;
+  border-left:1px solid oklch(100% 0 0 / .05);
+  position:relative;
+}
+.pb-index {
+  font-family:var(--ff-m); font-size:.64rem; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--mist); margin-bottom:auto; padding-bottom:32px;
+  display:flex; justify-content:space-between; align-items:flex-start;
+}
+.pb-index-num { color:oklch(100% 0 0 / .15); font-size:3.5rem; font-family:var(--ff-d); line-height:1; letter-spacing:.04em; }
+.pb-main { display:flex; flex-direction:column; gap:0; }
+.pb-client {
+  font-family:var(--ff-m); font-size:.66rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--accent); margin-bottom:10px;
+}
+.pb-name {
+  font-family:var(--ff-d);
+  font-size:clamp(34px,4.2vw,58px);
+  line-height:.92; letter-spacing:.01em; color:var(--paper);
+  margin-bottom:28px;
+}
+.pb-spec {
+  display:grid; grid-template-columns:1fr 1fr; gap:16px 24px;
+  border-top:1px solid oklch(100% 0 0 / .07);
+  padding-top:22px; margin-bottom:28px;
+}
+.pb-spec-item { display:flex; flex-direction:column; gap:3px; }
+.pb-spec-key { font-family:var(--ff-m); font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:oklch(100% 0 0 / .3); }
+.pb-spec-val { font-size:.84rem; color:var(--mist-2); font-weight:300; line-height:1.4; }
+.pb-footer {
+  display:flex; align-items:center; justify-content:space-between;
+  border-top:1px solid oklch(100% 0 0 / .07);
+  padding-top:20px; margin-top:auto;
+  flex-wrap:wrap; gap:12px;
+}
+.pb-status {
+  font-family:var(--ff-m); font-size:.64rem; letter-spacing:.16em; text-transform:uppercase;
+  display:flex; align-items:center; gap:8px;
+}
+.pb-status-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); }
+.pb-status-dot.pending { background:var(--warn); animation:pd 2s ease-in-out infinite; }
+.pb-url {
+  font-family:var(--ff-m); font-size:.72rem; color:var(--mist);
+  letter-spacing:.04em; text-decoration:underline; text-decoration-color:oklch(100% 0 0 / .15);
+  text-underline-offset:3px; transition:color .2s, text-decoration-color .2s;
+}
+.pb-url:hover { color:var(--paper); text-decoration-color:var(--paper); }
+.pb-url-dead { font-family:var(--ff-m); font-size:.72rem; color:oklch(100% 0 0 / .2); letter-spacing:.04em; font-style:italic; }
+
+@keyframes pd { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.35;transform:scale(.65)} }
+
+/* fullscreen modal */
+.prev-modal { display:none; position:fixed; inset:0; z-index:9500; background:oklch(10% .007 240 / .97); flex-direction:column; align-items:center; justify-content:center; }
+.prev-modal.open { display:flex; }
+.pm-bar { width:100%; max-width:1200px; display:flex; align-items:center; justify-content:space-between; padding:12px 16px; flex-shrink:0; border-bottom:1px solid oklch(100% 0 0 / .07); }
+.pm-title { font-family:var(--ff-m); font-size:.76rem; letter-spacing:.14em; text-transform:uppercase; color:var(--mist-2); }
+.pm-close { background:none; border:1px solid oklch(100% 0 0 / .14); color:var(--paper); font-size:.8rem; padding:6px 15px; border-radius:var(--r); cursor:pointer; letter-spacing:.08em; transition:border-color .2s; }
+.pm-close:hover { border-color:var(--paper); }
+.pm-frame { flex:1; width:100%; max-width:1200px; position:relative; overflow:hidden; }
+.pm-frame iframe { width:100%; height:100%; border:none; }
+
+/* ===== PROCESS ===== */
+.proc-sec { background:var(--ink-2); }
+.proc-in { max-width:var(--mw); margin:0 auto; }
+.proc-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:34px; margin-top:60px; }
+.pst { position:relative; }
+.pst:not(:last-child)::after { content:''; position:absolute; top:25px; left:calc(100% + 17px); width:calc(34px - 17px); height:1px; background:oklch(100% 0 0 / .09); }
+.pst-n { font-family:var(--ff-d); font-size:3.4rem; line-height:1; letter-spacing:.04em; color:oklch(100% 0 0 / .052); margin-bottom:5px; }
+.pst-t { font-family:var(--ff-d); font-size:1.3rem; letter-spacing:.04em; color:var(--paper); margin-bottom:9px; }
+.pst-d { font-size:.84rem; color:var(--mist-2); line-height:1.7; }
+
+/* ===== CONTACT ===== */
+.con-in { max-width:var(--mw); margin:0 auto; display:grid; grid-template-columns:1fr 1.25fr; gap:68px; align-items:start; }
+.con-info { display:flex; flex-direction:column; gap:34px; }
+.con-det { display:flex; flex-direction:column; gap:5px; }
+.cl { font-family:var(--ff-m); font-size:.67rem; letter-spacing:.17em; text-transform:uppercase; color:var(--mist); }
+.cv { font-size:.98rem; color:var(--paper); font-weight:500; }
+.con-form { display:flex; flex-direction:column; gap:17px; }
+.f-row { display:grid; grid-template-columns:1fr 1fr; gap:13px; }
+.fg { display:flex; flex-direction:column; gap:6px; }
+.fl { font-family:var(--ff-m); font-size:.67rem; letter-spacing:.13em; text-transform:uppercase; color:var(--mist); }
+.fi,.ft {
+  background:var(--ink-2); border:1px solid oklch(100% 0 0 / .08);
+  border-radius:var(--r); padding:12px 15px; color:var(--paper);
+  font-size:.91rem; outline:none; width:100%;
+  transition:border-color .2s,background .2s;
+}
+.fi:focus,.ft:focus { border-color:var(--accent); background:var(--ink-3); }
+.ft { resize:vertical; min-height:128px; }
+.fsub {
+  align-self:flex-start; background:var(--accent); color:var(--ink);
+  font-weight:500; font-size:.85rem; letter-spacing:.07em; text-transform:uppercase;
+  padding:14px 32px; border:none; border-radius:var(--r); cursor:pointer;
+  transition:background .2s,transform .3s var(--ease),box-shadow .3s;
+}
+.fsub:hover { background:var(--acc-2); transform:translateY(-2px); box-shadow:0 7px 20px oklch(63% .21 145 / .2); }
+.fok { display:none; padding:13px 17px; background:oklch(63% .21 145 / .08); border:1px solid oklch(63% .21 145 / .24); border-radius:var(--r); color:var(--accent); font-size:.86rem; }
+.fok.show { display:block; }
+
+/* ===== FOOTER ===== */
+footer { background:oklch(10% .007 240); border-top:1px solid oklch(100% 0 0 / .06); padding:34px clamp(18px,4vw,52px); display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; }
+.f-logo { font-family:var(--ff-d); font-size:1.2rem; letter-spacing:.07em; color:var(--paper); }
+.f-logo b { color:var(--accent); font-weight:400; }
+.f-copy { font-size:.76rem; color:var(--mist); text-align:center; }
+.f-soc { display:flex; gap:11px; min-width:0; }
+.f-soc:empty { display:none; }
+.sl { width:33px; height:33px; border-radius:50%; border:1px solid oklch(100% 0 0 / .12); display:flex; align-items:center; justify-content:center; color:var(--mist); font-size:.72rem; font-weight:500; transition:border-color .2s,color .2s; }
+.sl:hover { border-color:var(--accent); color:var(--accent); }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1080px){
+  .pc{grid-template-columns:1fr;min-height:auto}
+  .pc:nth-child(even){direction:ltr}
+  .pp{aspect-ratio:16/9}
+  .pb-spec{grid-template-columns:repeat(3,1fr)}
+  .about-g{grid-template-columns:1fr;gap:44px}
+  .a-vis{aspect-ratio:16/9}
+  .svc-g{grid-template-columns:1fr 1fr}
+  .svc-hd{grid-template-columns:1fr;gap:26px}
+  .proc-steps{grid-template-columns:1fr 1fr;gap:26px}
+  .pst::after{display:none}
+  .con-in{grid-template-columns:1fr;gap:44px}
+  .stat-bar{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .n-links{display:none} .ham{display:flex}
+  .h1{font-size:clamp(50px,14vw,78px)}
+  .svc-g{grid-template-columns:1fr}
+  .proc-steps{grid-template-columns:1fr}
+  .f-row{grid-template-columns:1fr}
+  .port-hd{flex-direction:column;align-items:flex-start}
+  footer{flex-direction:column;text-align:center}
+  .stat-bar{grid-template-columns:1fr 1fr;gap:14px 10px;padding:22px 18px}
+  .fsub{width:100%;justify-content:center;display:flex}
+}
+</style>
+</head>
+<body>
+
+<!-- Embedded project HTML for local preview -->
+<script id="apr-data" type="text/html-data"><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Purpose Roofing | Belleville, ON | (613) 885-8234</title>
+    <meta name="description" content="All Purpose Roofing - Roofing contractor in Belleville, Ontario. Available 24 hours. Call (613) 885-8234 for a free estimate.">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #1a3a5c; --primary-dark: #0f2640; --accent: #d4691e; --accent-hover: #b85a18; --light: #f4f5f7; --dark: #222; --gray: #666; --white: #fff; --border: #ddd; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Open Sans', sans-serif; color: var(--dark); line-height: 1.7; background: #fff; }
+        h1,h2,h3,h4 { font-family: 'Montserrat', sans-serif; }
+        a { text-decoration: none; color: inherit; }
+        .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+        .top-bar { background: #0f2640; color: rgba(255,255,255,.85); padding: 9px 0; font-size: .85rem; }
+        .top-bar .container { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+        .top-bar-left { display:flex; gap:20px; flex-wrap:wrap; align-items:center; }
+        .top-bar-left span { display:flex; align-items:center; gap:7px; }
+        .top-bar-left a { color:rgba(255,255,255,.85); }
+        .top-bar-left i { color:var(--accent); font-size:.8rem; }
+        .navbar { background:#fff; border-bottom:1px solid var(--border); padding:14px 0; position:sticky; top:0; z-index:1000; }
+        .navbar .container { display:flex; justify-content:space-between; align-items:center; }
+        .logo { display:flex; align-items:center; gap:11px; }
+        .logo-icon { width:44px; height:44px; background:var(--accent); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.3rem; }
+        .logo-text h1 { font-size:1.25rem; font-weight:800; color:var(--primary-dark); line-height:1.2; }
+        .logo-text span { font-size:.7rem; color:var(--gray); font-weight:600; text-transform:uppercase; letter-spacing:1.5px; }
+        .nav-links { display:flex; list-style:none; gap:28px; align-items:center; }
+        .nav-links a { font-family:'Montserrat',sans-serif; font-weight:600; font-size:.88rem; color:#333; transition:color .2s; }
+        .nav-links a:hover { color:var(--accent); }
+        .nav-phone-link { background:var(--accent)!important; color:#fff!important; padding:9px 20px; border-radius:6px; }
+        .hero { position:relative; min-height:88vh; display:flex; align-items:center; background:linear-gradient(to right,rgba(10,28,48,.93) 50%,rgba(10,28,48,.6) 100%),url('https://images.unsplash.com/photo-1632823471565-1ecdf5c6d7b6?w=1600') center/cover; color:#fff; }
+        .hero-content { max-width:620px; padding:60px 0; }
+        .hero-label { font-size:.82rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--accent); margin-bottom:18px; font-family:'Montserrat',sans-serif; }
+        .hero h2 { font-size:clamp(2rem,4vw,3.2rem); font-weight:800; line-height:1.18; margin-bottom:20px; }
+        .hero p { font-size:1.05rem; color:rgba(255,255,255,.82); margin-bottom:36px; max-width:500px; }
+        .hero-buttons { display:flex; gap:14px; flex-wrap:wrap; }
+        .btn-call { display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#fff; padding:14px 30px; border-radius:6px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:.95rem; transition:background .2s; }
+        .btn-call:hover { background:var(--accent-hover); }
+        .btn-ghost { display:inline-flex; align-items:center; gap:8px; background:transparent; color:#fff; padding:14px 30px; border-radius:6px; border:1.5px solid rgba(255,255,255,.5); font-family:'Montserrat',sans-serif; font-weight:700; font-size:.95rem; }
+        .hero-meta { display:flex; gap:36px; margin-top:50px; padding-top:36px; border-top:1px solid rgba(255,255,255,.15); flex-wrap:wrap; }
+        .hero-meta-item strong { display:block; font-family:'Montserrat',sans-serif; font-size:1.05rem; font-weight:700; color:var(--accent); }
+        .hero-meta-item span { font-size:.82rem; color:rgba(255,255,255,.65); }
+        .trust-bar { background:var(--light); border-bottom:1px solid var(--border); padding:20px 0; }
+        .trust-bar .container { display:flex; justify-content:center; gap:50px; flex-wrap:wrap; }
+        .trust-item { display:flex; align-items:center; gap:10px; color:var(--gray); font-size:.9rem; font-weight:600; font-family:'Montserrat',sans-serif; }
+        .trust-item i { color:var(--accent); }
+        section { padding:80px 0; }
+        .section-label { font-family:'Montserrat',sans-serif; font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--accent); margin-bottom:10px; }
+        .section-title { font-size:clamp(1.6rem,3vw,2.2rem); font-weight:800; color:var(--primary-dark); margin-bottom:14px; line-height:1.25; }
+        .section-sub { color:var(--gray); font-size:1rem; max-width:540px; line-height:1.7; }
+        .section-header-block { margin-bottom:50px; }
+        .section-header-center { text-align:center; margin-bottom:50px; }
+        .section-header-center .section-sub { margin:0 auto; }
+        .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+        .service-card { background:#fff; padding:36px 30px; }
+        .service-card:hover { background:#fafafa; }
+        .service-card-icon { width:46px; height:46px; background:rgba(212,105,30,.1); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; color:var(--accent); font-size:1.1rem; }
+        .service-card h3 { font-size:1.05rem; font-weight:700; color:var(--primary-dark); margin-bottom:10px; }
+        .service-card p { color:var(--gray); font-size:.9rem; line-height:1.65; }
+        .why-us { background:var(--light); }
+        .why-us-grid { display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center; }
+        .why-us-image-wrap { position:relative; }
+        .why-us-image-wrap img { border-radius:10px; width:100%; height:460px; object-fit:cover; }
+        .image-callout { position:absolute; bottom:-18px; right:-18px; background:var(--primary-dark); color:#fff; padding:22px 26px; border-radius:10px; text-align:center; }
+        .image-callout strong { display:block; font-family:'Montserrat',sans-serif; font-size:1.8rem; font-weight:800; color:var(--accent); line-height:1; }
+        .image-callout span { font-size:.78rem; text-transform:uppercase; letter-spacing:1px; opacity:.8; }
+        .why-list { display:flex; flex-direction:column; gap:22px; margin-top:30px; }
+        .why-item { display:flex; gap:16px; align-items:flex-start; }
+        .why-check { width:34px; height:34px; min-width:34px; border-radius:50%; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-size:.8rem; margin-top:2px; }
+        .why-item h4 { font-size:.97rem; font-weight:700; color:var(--primary-dark); margin-bottom:3px; }
+        .why-item p { font-size:.88rem; color:var(--gray); line-height:1.6; }
+        .cta-strip { background:var(--primary-dark); color:#fff; padding:55px 0; }
+        .cta-strip .container { display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap; }
+        .cta-strip-text h2 { font-size:clamp(1.4rem,2.5vw,1.9rem); font-weight:800; margin-bottom:8px; }
+        .cta-strip-text p { color:rgba(255,255,255,.72); font-size:.95rem; }
+        .cta-strip-actions { display:flex; align-items:center; gap:20px; flex-wrap:wrap; flex-shrink:0; }
+        .cta-strip-phone { font-family:'Montserrat',sans-serif; font-size:1.5rem; font-weight:800; color:var(--accent); display:flex; align-items:center; gap:8px; }
+        .process { background:#fff; }
+        .process-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:30px; }
+        .process-step { text-align:center; padding:10px; }
+        .step-num { width:60px; height:60px; border:2px solid var(--accent); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-family:'Montserrat',sans-serif; font-size:1.4rem; font-weight:800; color:var(--accent); }
+        .process-step h3 { font-size:.97rem; font-weight:700; color:var(--primary-dark); margin-bottom:10px; }
+        .process-step p { color:var(--gray); font-size:.87rem; line-height:1.6; }
+        .reviews { background:var(--light); }
+        .reviews-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+        .review-card { background:#fff; border:1px solid var(--border); border-radius:10px; padding:30px; }
+        .review-stars { display:flex; gap:2px; color:#f59e0b; font-size:.9rem; margin-bottom:14px; }
+        .review-card p { font-size:.92rem; color:#444; line-height:1.75; margin-bottom:20px; }
+        .review-footer { display:flex; align-items:center; gap:12px; padding-top:16px; border-top:1px solid #eee; }
+        .review-avatar { width:40px; height:40px; border-radius:50%; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Montserrat',sans-serif; font-weight:700; font-size:.9rem; flex-shrink:0; }
+        .review-name { font-family:'Montserrat',sans-serif; font-weight:700; font-size:.9rem; color:var(--primary-dark); }
+        .review-source { font-size:.78rem; color:#999; margin-top:1px; }
+        .gallery { background:#fff; }
+        .gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+        .gallery-item { border-radius:8px; overflow:hidden; height:240px; }
+        .gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform .4s; }
+        .gallery-item:hover img { transform:scale(1.05); }
+        .areas { background:var(--light); padding:50px 0; border-top:1px solid var(--border); }
+        .areas .container { display:flex; gap:30px; align-items:flex-start; flex-wrap:wrap; }
+        .areas-heading h3 { font-size:1rem; font-weight:700; color:var(--primary-dark); }
+        .areas-heading p { font-size:.82rem; color:var(--gray); margin-top:4px; }
+        .areas-list { display:flex; flex-wrap:wrap; gap:8px; flex:1; }
+        .area-tag { background:#fff; border:1px solid var(--border); padding:7px 16px; border-radius:20px; font-size:.83rem; font-family:'Montserrat',sans-serif; font-weight:600; }
+        .contact { background:#fff; }
+        .contact-grid { display:grid; grid-template-columns:1fr 1.4fr; gap:60px; }
+        .contact-info-block h2 { font-size:clamp(1.5rem,2.5vw,2rem); font-weight:800; color:var(--primary-dark); margin-bottom:12px; }
+        .contact-info-block > p { color:var(--gray); font-size:.95rem; margin-bottom:36px; line-height:1.7; }
+        .contact-details { display:flex; flex-direction:column; gap:20px; }
+        .contact-row { display:flex; gap:14px; align-items:flex-start; }
+        .contact-row-icon { width:40px; height:40px; min-width:40px; border-radius:8px; background:rgba(212,105,30,.1); display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:1rem; }
+        .contact-row h4 { font-size:.85rem; font-weight:700; color:var(--primary-dark); margin-bottom:2px; font-family:'Montserrat',sans-serif; }
+        .contact-row p,.contact-row a { font-size:.9rem; color:var(--gray); line-height:1.5; }
+        .form-wrap { background:var(--light); border:1px solid var(--border); border-radius:10px; padding:36px; }
+        .form-wrap h3 { font-size:1.25rem; font-weight:700; color:var(--primary-dark); margin-bottom:24px; }
+        .form-group { margin-bottom:16px; }
+        .form-group label { display:block; font-family:'Montserrat',sans-serif; font-weight:600; font-size:.82rem; color:#444; margin-bottom:5px; }
+        .form-group input,.form-group textarea,.form-group select { width:100%; padding:11px 14px; border:1.5px solid var(--border); border-radius:7px; font-size:.92rem; background:#fff; transition:border-color .2s; }
+        .form-group input:focus,.form-group textarea:focus,.form-group select:focus { outline:none; border-color:var(--accent); }
+        .form-group textarea { resize:vertical; min-height:110px; }
+        .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+        .submit-btn { width:100%; padding:14px; background:var(--accent); color:#fff; border:none; border-radius:7px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:.92rem; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; text-transform:uppercase; }
+        .submit-btn:hover { background:var(--accent-hover); }
+        .footer { background:var(--primary-dark); color:rgba(255,255,255,.8); padding:55px 0 28px; }
+        .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1.5fr; gap:40px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,.1); margin-bottom:28px; }
+        .footer h4 { font-size:.85rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#fff; margin-bottom:16px; }
+        .footer-links { list-style:none; display:flex; flex-direction:column; gap:9px; }
+        .footer-links a { font-size:.88rem; color:rgba(255,255,255,.6); transition:color .2s; }
+        .footer-links a:hover { color:var(--accent); }
+        .footer-contact-row { display:flex; gap:10px; align-items:flex-start; margin-bottom:12px; font-size:.87rem; }
+        .footer-contact-row i { color:var(--accent); margin-top:3px; font-size:.8rem; }
+        .footer-contact-row a,.footer-contact-row span { color:rgba(255,255,255,.6); }
+        .footer-bottom { text-align:center; font-size:.82rem; color:rgba(255,255,255,.35); }
+        @media(max-width:900px){.why-us-grid,.contact-grid{grid-template-columns:1fr;gap:40px}.process-steps,.reviews-grid,.gallery-grid{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr}}
+        @media(max-width:768px){section{padding:60px 0}.services-grid,.process-steps,.reviews-grid{grid-template-columns:1fr}.gallery-grid{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+    <div class="top-bar"><div class="container"><div class="top-bar-left"><span><i class="fas fa-map-marker-alt"></i>14 Bridge St W #1, Belleville, ON</span><span><i class="fas fa-clock"></i>Open 24 Hours</span><span><i class="fas fa-phone"></i><a href="tel:6138858234">(613) 885-8234</a></span></div></div></div>
+    <nav class="navbar"><div class="container"><a href="#" class="logo"><div class="logo-icon"><i class="fas fa-house-chimney"></i></div><div class="logo-text"><h1>All Purpose Roofing</h1><span>Belleville, Ontario</span></div></a><ul class="nav-links"><li><a href="#">Home</a></li><li><a href="#">Services</a></li><li><a href="#">About</a></li><li><a href="#">Contact</a></li><li><a href="tel:6138858234" class="nav-phone-link"><i class="fas fa-phone"></i>(613) 885-8234</a></li></ul></div></nav>
+    <section class="hero"><div class="container"><div class="hero-content"><p class="hero-label">Belleville &amp; Quinte Region</p><h2>Roofing done right — the first time.</h2><p>Everything from small repairs to full replacements. Residential and commercial. Available around the clock.</p><div class="hero-buttons"><a href="tel:6138858234" class="btn-call"><i class="fas fa-phone"></i>(613) 885-8234</a><a href="#" class="btn-ghost">Free Estimate</a></div><div class="hero-meta"><div class="hero-meta-item"><strong>24/7</strong><span>Emergency calls</span></div><div class="hero-meta-item"><strong>Free</strong><span>Estimates</span></div><div class="hero-meta-item"><strong>Local</strong><span>Based in Belleville</span></div></div></div></div></section>
+    <div class="trust-bar"><div class="container"><div class="trust-item"><i class="fas fa-phone-alt"></i><span>Available 24 Hours</span></div><div class="trust-item"><i class="fas fa-map-marker-alt"></i><span>Local Belleville Business</span></div><div class="trust-item"><i class="fas fa-file-invoice-dollar"></i><span>Free Estimates</span></div><div class="trust-item"><i class="fas fa-home"></i><span>Residential &amp; Commercial</span></div></div></div>
+    <section class="services"><div class="container"><div class="section-header-block"><p class="section-label">What We Do</p><h2 class="section-title">Roofing Services</h2><p class="section-sub">From a single shingle to a full commercial flat roof — we do it all and we do it properly.</p></div><div class="services-grid"><div class="service-card"><div class="service-card-icon"><i class="fas fa-hammer"></i></div><h3>Roof Installation</h3><p>New build or starting fresh? We'll set you up with a solid roof built to handle Ontario winters.</p></div><div class="service-card"><div class="service-card-icon"><i class="fas fa-wrench"></i></div><h3>Roof Repairs</h3><p>Leak, missing shingles, storm damage — we find the problem and fix it. No upselling.</p></div><div class="service-card"><div class="service-card-icon"><i class="fas fa-rotate"></i></div><h3>Roof Replacement</h3><p>When a repair won't cut it, we'll walk you through your options and replace cleanly.</p></div><div class="service-card"><div class="service-card-icon"><i class="fas fa-magnifying-glass"></i></div><h3>Roof Inspections</h3><p>Buying or selling? Worried heading into winter? We'll give you an honest assessment.</p></div><div class="service-card"><div class="service-card-icon"><i class="fas fa-bolt"></i></div><h3>Emergency Repairs</h3><p>Storm at 2am took your roof? We pick up. We show up. We fix it.</p></div><div class="service-card"><div class="service-card-icon"><i class="fas fa-building"></i></div><h3>Commercial Roofing</h3><p>Flat roofs, metal, low-slope systems — we work with commercial owners across the region.</p></div></div></div></section>
+    <section class="why-us"><div class="container"><div class="why-us-grid"><div class="why-us-image-wrap"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800" alt="Roofer working"><div class="image-callout"><strong>24/7</strong><span>Always<br>Available</span></div></div><div><p class="section-label">Why All Purpose Roofing</p><h2 class="section-title">Local. Straightforward. We stand behind our work.</h2><p class="section-sub">We're based right here in Belleville. We know what Ontario roofs go through.</p><div class="why-list"><div class="why-item"><div class="why-check"><i class="fas fa-check"></i></div><div><h4>We Answer the Phone</h4><p>24 hours a day. Don't sit there and wait — give us a call.</p></div></div><div class="why-item"><div class="why-check"><i class="fas fa-check"></i></div><div><h4>Honest Estimates</h4><p>We tell you what needs to be done and what it'll cost. No surprises.</p></div></div><div class="why-item"><div class="why-check"><i class="fas fa-check"></i></div><div><h4>We Clean Up</h4><p>Your yard won't look like a construction site when we leave.</p></div></div><div class="why-item"><div class="why-check"><i class="fas fa-check"></i></div><div><h4>Built for This Climate</h4><p>Materials suited for Ontario weather. Your roof needs to last.</p></div></div></div></div></div></div></section>
+    <div class="cta-strip"><div class="container"><div class="cta-strip-text"><h2>Got a roofing problem? Let's talk.</h2><p>Free estimates. No obligation. Straight answers.</p></div><div class="cta-strip-actions"><a href="tel:6138858234" class="cta-strip-phone"><i class="fas fa-phone"></i>(613) 885-8234</a></div></div></div>
+    <section class="reviews"><div class="container"><div class="section-header-center"><p class="section-label">Reviews</p><h2 class="section-title">What people are saying</h2></div><div class="reviews-grid"><div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>"Great job and awesome friendly service! Thanks to the whole team at All Purpose Roofing. Highly recommend."</p><div class="review-footer"><div class="review-avatar">SD</div><div><div class="review-name">Sharon Dupont Good</div><div class="review-source">Google Review</div></div></div></div><div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>"They came out quickly, the quote was fair, and the work was solid. Cleaned up everything before they left."</p><div class="review-footer"><div class="review-avatar">JL</div><div><div class="review-name">John L.</div><div class="review-source">Belleville Homeowner</div></div></div></div><div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>"Called after a storm knocked shingles off. They came the same day. Fixed it and explained exactly what happened."</p><div class="review-footer"><div class="review-avatar">MR</div><div><div class="review-name">M. Richardson</div><div class="review-source">Emergency Repair Customer</div></div></div></div></div></div></section>
+    <footer class="footer"><div class="container"><div class="footer-grid"><div><div class="logo"><div class="logo-icon"><i class="fas fa-house-chimney"></i></div><div class="logo-text"><h1 style="color:#fff">All Purpose Roofing</h1><span style="color:rgba(255,255,255,.5)">Belleville, Ontario</span></div></div><p style="margin-top:14px;font-size:.88rem;color:rgba(255,255,255,.58)">Local roofing contractor serving Belleville and the Quinte region.</p></div><div><h4>Services</h4><ul class="footer-links"><li><a href="#">Roof Repairs</a></li><li><a href="#">Replacement</a></li><li><a href="#">Installation</a></li><li><a href="#">Inspections</a></li><li><a href="#">Emergency</a></li></ul></div><div><h4>Contact</h4><div class="footer-contact-row"><i class="fas fa-phone"></i><a href="tel:6138858234">(613) 885-8234</a></div><div class="footer-contact-row"><i class="fas fa-map-marker-alt"></i><span>14 Bridge St W #1, Belleville</span></div><div class="footer-contact-row"><i class="fas fa-clock"></i><span>Open 24 Hours</span></div></div></div><div class="footer-bottom"><p>&copy; 2025 All Purpose Roofing. All rights reserved.</p></div></div></footer>
+</body>
+</html>
+</script>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="n-logo" id="nl"></a>
+  <div class="n-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">Work</a>
+    <a href="#process">Process</a>
+    <a href="#contact" class="n-cta">Get a Quote</a>
+  </div>
+  <button class="ham" id="ham" aria-label="Open menu" aria-expanded="false" aria-controls="mob"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mob-nav" id="mob" role="dialog" aria-label="Navigation menu">
+  <a href="#about"     onclick="cm()">About</a>
+  <a href="#services"  onclick="cm()">Services</a>
+  <a href="#portfolio" onclick="cm()">Work</a>
+  <a href="#process"   onclick="cm()">Process</a>
+  <a href="#contact"   onclick="cm()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="h-grid"></div>
+  <div class="h-glow"></div>
+  <div class="h-eye rv" id="he"></div>
+  <h1 class="h1 rv d1">Websites that<br>work as hard<br>as <em>you do.</em></h1>
+  <p class="h-sub rv d2" id="hs"></p>
+  <div class="h-act rv d3">
+    <a href="#contact" class="btn-f">
+      Get a Free Quote
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M9 3.5l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="#portfolio" class="btn-t">See the work ↓</a>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker"><div class="t-track" id="tk"></div></div>
+
+<!-- STATS -->
+<div class="stat-bar">
+  <div class="s-item rv"><span class="s-num">100%</span><span class="s-lab">Mobile First</span></div>
+  <div class="s-item rv d1"><span class="s-num">Fast</span><span class="s-lab">Load Times</span></div>
+  <div class="s-item rv d2"><span class="s-num">Zero</span><span class="s-lab">Templates Used</span></div>
+  <div class="s-item rv d3"><span class="s-num">SEO</span><span class="s-lab">Foundations Included</span></div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="svc-sec">
+  <div class="svc-in">
+    <div class="svc-hd">
+      <div>
+        <div class="s-eye rv">What We Do</div>
+        <h2 class="s-ttl rv">Every site,<br>built to win.</h2>
+      </div>
+      <p class="s-body rv" style="align-self:flex-end">No page-builders, no bloat. Each site is hand-coded for speed, SEO, and results. If your competitors have a site and you don't, they're already winning.</p>
+    </div>
+    <div class="svc-g" id="sg"></div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="port-in">
+    <div class="port-hd">
+      <div>
+        <div class="s-eye rv">Our Work</div>
+        <h2 class="s-ttl rv">Results<br>speak.</h2>
+      </div>
+      <p class="s-body rv" style="font-size:.91rem">Every site tells a story. Here's a look at what we've built.</p>
+    </div>
+    <div class="port-g" id="pg"></div>
+    <div style="text-align:center;margin-top:clamp(48px,8vw,72px)">
+      <a href="templates.html" class="btn-f">
+        Browse Template Styles
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M9 3.5l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <p style="margin-top:14px;font-size:.84rem;color:var(--mist)">Or</p>
+      <a href="#contact" class="btn-t" style="margin-top:10px;display:inline-block">Get a Custom Site</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="proc-sec">
+  <div class="proc-in">
+    <div style="max-width:540px">
+      <div class="s-eye rv">How It Works</div>
+      <h2 class="s-ttl rv">Simple process.<br>Serious results.</h2>
+    </div>
+    <div class="proc-steps" id="ps"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="con-in">
+    <div class="con-info">
+      <div>
+        <div class="s-eye rv">Get in Touch</div>
+        <h2 class="s-ttl rv">Let's build<br>something.</h2>
+        <p class="s-body rv" style="margin-top:13px;font-size:.91rem">Tell me about your business and what you need. I'll get back to you within one business day — no sales pitch, just a real conversation.</p>
+      </div>
+      <div class="con-det rv"><span class="cl">Email</span><span class="cv" id="ce"></span></div>
+      <div class="con-det rv"><span class="cl">Phone</span><span class="cv" id="cp"></span></div>
+    </div>
+    <form class="con-form rv" id="cf">
+      <div class="f-row">
+        <div class="fg"><label class="fl" for="fn">First Name</label><input class="fi" type="text" id="fn" name="firstName" placeholder="Jane" autocomplete="given-name" required /></div>
+        <div class="fg"><label class="fl" for="ln">Last Name</label><input class="fi" type="text" id="ln" name="lastName" placeholder="Smith" autocomplete="family-name" required /></div>
+      </div>
+      <div class="fg"><label class="fl" for="fe">Email</label><input class="fi" type="email" id="fe" name="email" placeholder="jane@yourbusiness.com" autocomplete="email" required /></div>
+      <div class="fg"><label class="fl" for="fb">Business Name</label><input class="fi" type="text" id="fb" name="business" placeholder="Your Business Name" autocomplete="organization" /></div>
+      <div class="fg"><label class="fl" for="fm">Tell me about your project</label><textarea class="ft" id="fm" name="message" placeholder="We're a local contractor — no website yet, need something professional..." required></textarea></div>
+      <button type="submit" class="fsub">Send Message →</button>
+      <div class="fok" id="fok">✓ Message received. I'll be in touch within one business day.</div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo" id="flo"></div>
+  <p class="f-copy" id="fco"></p>
+  <div class="f-soc" id="fso"></div>
+</footer>
+
+<!-- PREVIEW MODAL -->
+<div class="prev-modal" id="pm">
+  <div class="pm-bar">
+    <span class="pm-title" id="pmt"></span>
+    <button class="pm-close" onclick="cpm()">✕ Close</button>
+  </div>
+  <div class="pm-frame">
+    <iframe id="pmf" title="Preview" sandbox="allow-scripts allow-same-origin"></iframe>
+  </div>
+</div>
+
+<script>
+// ─── Grab embedded APR HTML ───
+const aprEl = document.getElementById('apr-data');
+const APR_HTML = aprEl ? aprEl.textContent : '';
+
+// ─── Apply config ───
+document.title = CONFIG.tabTitle;
+document.getElementById('page-desc').content = CONFIG.metaDescription;
+document.getElementById('nl').innerHTML = CONFIG.businessName.replace(/\s/,'<b>.</b>');
+document.getElementById('he').textContent = CONFIG.businessName + ' — Custom Web Design';
+document.getElementById('hs').textContent = CONFIG.subTagline;
+document.getElementById('ce').textContent = CONFIG.contactEmail;
+document.getElementById('cp').textContent = CONFIG.contactPhone;
+document.getElementById('flo').innerHTML = CONFIG.businessName.replace(/\s/,'<b>.</b>');
+document.getElementById('fco').textContent = `© ${new Date().getFullYear()} ${CONFIG.businessName}. All rights reserved.`;
+const fs = document.getElementById('fso');
+if(CONFIG.socialLinkedIn)  fs.innerHTML += `<a href="${CONFIG.socialLinkedIn}"  class="sl" target="_blank" rel="noopener">in</a>`;
+if(CONFIG.socialInstagram) fs.innerHTML += `<a href="${CONFIG.socialInstagram}" class="sl" target="_blank" rel="noopener">ig</a>`;
+if(CONFIG.socialFacebook)  fs.innerHTML += `<a href="${CONFIG.socialFacebook}"  class="sl" target="_blank" rel="noopener">fb</a>`;
+
+// Services
+const sg = document.getElementById('sg');
+CONFIG.services.forEach((s,i)=>{
+  sg.innerHTML += `<div class="sc rv" style="transition-delay:${i*.07}s">
+    <div class="sc-ico">${s.icon}</div>
+    <div class="sc-ttl">${s.title}</div>
+    <div class="sc-dsc">${s.desc}</div>
+  </div>`;
+});
+
+// Portfolio
+const LOCAL = {};
+
+// Real SVG illustrations for each project placeholder (keyed by title)
+const PLACEHOLDERS = {};
+
+// Fallback SVG for any project without a defined placeholder
+function genericPlaceholder(title, idx) {
+  const hues = [175, 260, 320, 45];
+  const h = hues[idx % hues.length];
+  return `<svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <rect width="600" height="480" fill="oklch(16% 0.009 240)"/>
+    <rect x="0" y="0" width="600" height="480" fill="oklch(18% 0.04 ${h} / 0.4)"/>
+    <text x="300" y="260" font-family="serif" font-size="96" fill="oklch(100% 0 0 / 0.04)"
+      text-anchor="middle" dominant-baseline="middle" letter-spacing="4">
+      ${title.split(' ').map(w=>w[0]).join('')}
+    </text>
+    <text x="300" y="430" font-family="monospace" font-size="9" fill="oklch(100% 0 0 / 0.18)"
+      text-anchor="middle" letter-spacing="2">${title.toUpperCase()}</text>
+  </svg>`;
+}
+
+const pg = document.getElementById('pg');
+CONFIG.projects.forEach((p,i)=>{
+  const hasLive  = p.published && p.previewUrl;
+  const localHtml = LOCAL[p.title] || '';
+  const hasLocal = !p.published && localHtml.trim().length > 10;
+
+  let prevHtml = '';
+  if (hasLive) {
+    prevHtml = `
+      <div class="pi-wrap" id="iw${i}">
+        <iframe src="${p.previewUrl}" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" title="${p.title} preview"></iframe>
+      </div>
+      <div class="pi-overlay"></div>
+      <button class="pp-btn" onclick="opm('${p.title}','${p.previewUrl}',null,${i})">
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M7 2l3 3.5L7 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Open Full Preview
+      </button>`;
+  } else if (hasLocal) {
+    prevHtml = `
+      <div class="pi-wrap" id="iw${i}">
+        <iframe loading="lazy" scrolling="no" title="${p.title} preview"></iframe>
+      </div>
+      <div class="pi-overlay"></div>
+      <button class="pp-btn" onclick="opm('${p.title}',null,'${p.title}',${i})">
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h9M7 2l3 3.5L7 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Open Full Preview
+      </button>`;
+  } else {
+    const svgContent = PLACEHOLDERS[p.title] || genericPlaceholder(p.title, i);
+    prevHtml = `<div class="pp-ph">${svgContent}</div>`;
+  }
+
+  // Editorial spec items
+  const specItems = [
+    { k:'Type',    v: p.subtitle },
+    { k:'Stack',   v: 'HTML / CSS / JS' },
+    { k:'For',     v: p.tags[0] || 'Small Business' },
+    { k:'Status',  v: p.published ? 'Live' : 'In Progress' },
+  ];
+  const specHtml = specItems.map(s=>
+    `<div class="pb-spec-item"><span class="pb-spec-key">${s.k}</span><span class="pb-spec-val">${s.v}</span></div>`
+  ).join('');
+
+  const footerHtml = p.published
+    ? `<div class="pb-status"><span class="pb-status-dot"></span><span style="color:var(--accent)">Live</span></div>
+       <a href="${p.url}" target="_blank" rel="noopener" class="pb-url">${p.url.replace('https://','')}</a>`
+    : `<div class="pb-status"><span class="pb-status-dot pending"></span><span style="color:var(--warn)">In Progress</span></div>
+       <span class="pb-url-dead">URL pending</span>`;
+
+  pg.innerHTML += `
+    <div class="pc rv">
+      <div class="pp" id="pp${i}">${prevHtml}</div>
+      <div class="pb">
+        <div class="pb-index">
+          <span>Project</span>
+          <span class="pb-index-num">0${i+1}</span>
+        </div>
+        <div class="pb-main">
+          <div class="pb-client">${p.subtitle}</div>
+          <div class="pb-name">${p.title}</div>
+          <div class="pb-spec">${specHtml}</div>
+        </div>
+        <div class="pb-footer">${footerHtml}</div>
+      </div>
+    </div>`;
+});
+
+// Scale iframes + inject local HTML
+function scaleIframes() {
+  CONFIG.projects.forEach((p,i)=>{
+    const wrap = document.getElementById(`iw${i}`);
+    if (!wrap) return;
+    const iframe = wrap.querySelector('iframe');
+    const container = document.getElementById(`pp${i}`);
+    if (!iframe || !container) return;
+    const cw = container.offsetWidth || 600;
+    const ch = container.offsetHeight || 480;
+    const IW = 1400, IH = 900;
+    const scale = Math.max(cw/IW, ch/IH);
+    iframe.style.width = IW+'px'; iframe.style.height = IH+'px';
+    iframe.style.transform = `scale(${scale})`;
+    // Inject local HTML once
+    if (!p.published && !iframe._injected) {
+      const html = LOCAL[p.title] || '';
+      if (html.trim().length > 10) {
+        try {
+          const doc = iframe.contentDocument || iframe.contentWindow.document;
+          doc.open(); doc.write(html); doc.close();
+          iframe._injected = true;
+        } catch(e) {}
+      }
+    }
+  });
+}
+window.addEventListener('load', ()=>{ scaleIframes(); setTimeout(scaleIframes, 800); });
+window.addEventListener('resize', scaleIframes);
+
+// Modal
+function opm(title, url, localKey, idx) {
+  const modal = document.getElementById('pm');
+  const iframe = document.getElementById('pmf');
+  document.getElementById('pmt').textContent = title;
+  iframe.src = '';
+  if (url) {
+    iframe.src = url;
+  } else if (localKey) {
+    const html = LOCAL[localKey] || '';
+    if (html.trim().length > 10) {
+      try { const d=iframe.contentDocument||iframe.contentWindow.document; d.open();d.write(html);d.close(); } catch(e){}
+    }
+  }
+  modal.classList.add('open'); document.body.style.overflow='hidden';
+}
+function cpm() {
+  document.getElementById('pm').classList.remove('open');
+  document.getElementById('pmf').src='';
+  document.body.style.overflow='';
+}
+document.getElementById('pm').addEventListener('click', function(e){ if(e.target===this) cpm(); });
+
+// Process steps
+const steps = [
+  {n:'01',t:'Discovery',d:"We talk about your business, goals, and what a great site would do for you. No jargon, no commitment."},
+  {n:'02',t:'Design',d:"I build a direction that fits your brand and customers. You review and approve before any code is written."},
+  {n:'03',t:'Build',d:"Hand-coded, fast, mobile-perfect. Typically delivered in 1–2 weeks depending on scope."},
+  {n:'04',t:'Launch',d:"We review together, make final tweaks, then go live. I stick around to make sure everything runs smoothly."},
+];
+const ps = document.getElementById('ps');
+steps.forEach((s,i)=>{
+  ps.innerHTML += `<div class="pst rv" style="transition-delay:${i*.1}s">
+    <div class="pst-n">${s.n}</div>
+    <div class="pst-t">${s.t}</div>
+    <div class="pst-d">${s.d}</div>
+  </div>`;
+});
+
+// Ticker
+const items = ['Custom Web Design','Mobile-First','SEO Ready','No Templates','Fast Load Times','Hand-Coded','Free Estimates','Small Business Specialist'];
+const tk = document.getElementById('tk');
+const html = items.map(t=>`<span>${t}</span><span class="dot">◆</span>`).join('');
+tk.innerHTML = html + html;
+
+// Nav scroll
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>50));
+
+// Mobile menu — aria, ESC, outside-click, body scroll lock
+const hamBtn = document.getElementById('ham');
+const mobNav = document.getElementById('mob');
+function openMob(){
+  mobNav.classList.add('open');
+  hamBtn.setAttribute('aria-expanded','true');
+  hamBtn.setAttribute('aria-label','Close menu');
+  document.body.style.overflow='hidden';
+}
+function cm(){
+  mobNav.classList.remove('open');
+  hamBtn.setAttribute('aria-expanded','false');
+  hamBtn.setAttribute('aria-label','Open menu');
+  document.body.style.overflow='';
+}
+hamBtn.addEventListener('click',()=>{ mobNav.classList.contains('open') ? cm() : openMob(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape' && mobNav.classList.contains('open')) cm(); });
+mobNav.addEventListener('click',e=>{ if(e.target===mobNav) cm(); });
+
+// Reveal
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+},{threshold:0.1});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// Form
+document.getElementById('cf').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const btn=this.querySelector('.fsub');
+  btn.textContent='Sending…'; btn.disabled=true;
+  try {
+    const r=await fetch(CONFIG.formspreeEndpoint,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(this)});
+    if(r.ok){ this.style.display='none'; document.getElementById('fok').classList.add('show'); }
+    else { btn.textContent='Try Again'; btn.disabled=false; }
+  } catch { btn.textContent='Try Again'; btn.disabled=false; }
+});
+</script>
+</body>
+</html>
